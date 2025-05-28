@@ -13,10 +13,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/finvisk-full-logo.png",
+        "foregroundImage": "./assets/images/finvisk-half-logo.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.harsh73.bsefrontend"
     },
     "web": {
       "bundler": "metro",
