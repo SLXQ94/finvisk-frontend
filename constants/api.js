@@ -1,0 +1,1 @@
+export const API_URL="https://bse-backend-9rpd.onrender.com/api";
