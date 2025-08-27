@@ -139,19 +139,37 @@ export default function Index() {
     }
   };
 
-  const openPaymentInBrowser = (paymentHTML) => {
-    // Create a Blob from the HTML string
-    const blob = new Blob([paymentHTML], { type: 'text/html' });
+  // const openPaymentInBrowser = (paymentHTML) => {
+  //   // Create a Blob from the HTML string
+  //   const blob = new Blob([paymentHTML], { type: 'text/html' });
 
-    // Create a URL for the blob
-    const url = URL.createObjectURL(blob);
+  //   // Create a URL for the blob
+  //   const url = URL.createObjectURL(blob);
 
-    // Open in external browser
-    Linking.openURL(url);
+  //   // Open in external browser
+  //   Linking.openURL(url);
 
-    // Cleanup: revoke the URL after a delay
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  };
+  //   // Cleanup: revoke the URL after a delay
+  //   setTimeout(() => URL.revokeObjectURL(url), 1000);
+  // };
+
+  // const openPaymentInBrowser = async (paymentHTML) => {
+  //   try {
+  //     // Path to a temporary HTML file
+  //     const fileUri = FileSystem.cacheDirectory + "payment.html";
+
+  //     // Write HTML to the file
+  //     await FileSystem.writeAsStringAsync(fileUri, paymentHTML, {
+  //       encoding: FileSystem.EncodingType.UTF8,
+  //     });
+
+  //     // Open in browser
+  //     // await Linking.openURL(fileUri);
+  //     await WebBrowser.openBrowserAsync(fileUri);
+  //   } catch (error) {
+  //     console.error("Failed to open payment page:", error);
+  //   }
+  // };
 
   // Automatically stop polling when both are ready
   useEffect(() => {
@@ -238,7 +256,8 @@ export default function Index() {
                         disabled={!paymentHTML}
                         onPress={() => {
                           if (paymentHTML) {
-                            openPaymentInBrowser(paymentHTML);
+                            // openPaymentInBrowser(paymentHTML);
+                            Linking.openURL(paymentHTML);
                           }
                         }}
                       >
