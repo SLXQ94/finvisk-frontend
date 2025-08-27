@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   Alert,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -92,7 +93,7 @@ const OnboardingScreen = () => {
   if (loading) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#6366f1" />
+        <ActivityIndicator size="large" color="#121212" />
       </View>
     );
   }
@@ -111,6 +112,10 @@ const OnboardingScreen = () => {
 
   return (
     <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={{ paddingBottom: 120 }} 
+        showsVerticalScrollIndicator={false}
+      >
       {/* Logo */}
       <Image 
         source={require('../../assets/images/finvisk-half-logo.png')} 
@@ -148,6 +153,8 @@ const OnboardingScreen = () => {
           </TouchableOpacity>
         ))}
       </View>
+
+      </ScrollView>
       
       {/* Continue/Finish Button */}
       <TouchableOpacity
@@ -214,15 +221,18 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   selectedOption: {
-    backgroundColor: '#6366f1',
-    borderColor: '#4f46e5',
+    // backgroundColor: '#6366f1',
+    // borderColor: '#4f46e5',
+    backgroundColor: '#000',
+    borderColor: '#000',
   },
   selectedOptionText: {
     color: '#ffffff',
     fontWeight: '500',
   },
   actionButton: {
-    backgroundColor: '#6366f1',
+    // backgroundColor: '#6366f1',
+    backgroundColor: '#121212',
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',

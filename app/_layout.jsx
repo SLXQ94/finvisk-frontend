@@ -5,6 +5,7 @@ import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import SafeScreen from "../components/SafeScreen";
 import { useAuthStore } from "../store/authStore";
+import { useProfileStore } from "../store/profileStore";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -13,6 +14,7 @@ export default function RootLayout() {
   const segments = useSegments();
 
   const {checkAuth, user, token, divisionIndex, isCheckingAuth} = useAuthStore();
+  const {fetchProfileStatus} = useProfileStore();
 
   const [fontsLoaded] = useFonts({
     "JetBrainsMono-Medium": require("../assets/fonts/JetBrainsMono-Medium.ttf")
@@ -31,7 +33,8 @@ export default function RootLayout() {
 
   // handle navigation based on the auth state
   useEffect(() => {
-    if (isCheckingAuth) return;
+    const handleNavigation = async () => {
+      if (isCheckingAuth) return;
 
     const currentSegment = segments[0];
     const isSignedIn = !!user && !!token;
@@ -49,10 +52,14 @@ export default function RootLayout() {
     }
 
     // User is signed in and has completed onboarding
-    if (isSignedIn && divisionIndex >= 0 && currentSegment !== "(tabs)") {
-      router.replace("/(tabs)");
+    if (isSignedIn && divisionIndex >= 0 && currentSegment !== "inside") {
+      await fetchProfileStatus();
+      router.replace("/inside");
       return;
     }
+    };
+
+    handleNavigation();
     
   }, [user, token, segments, isCheckingAuth, divisionIndex]);
 

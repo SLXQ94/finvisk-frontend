@@ -29,6 +29,21 @@
     black: "#000000",
   };
   // */
+
+  // PREMIUM
+  // const COLORS = {
+  //   primary: "#C9A227",        // Rich metallic gold (accent color)
+  //   textPrimary: "#E5C07B",    // Golden beige for main text
+  //   textSecondary: "#B5A68D",  // Muted champagne-gold for secondary text
+  //   textDark: "#F0E6D2",       // Warm ivory for text on black
+  //   placeholderText: "#7D7D7D",// Neutral gray for placeholders
+  //   background: "#0E0E0E",     // Premium deep black background
+  //   cardBackground: "#1A1A1A", // Charcoal for cards
+  //   inputBackground: "#2A2A2A",// Darker charcoal for inputs
+  //   border: "#3A3A3A",         // Subtle gray border
+  //   white: "#FFFFFF",          // Pure white (rare usage)
+  //   black: "#000000",          // Pure black
+  // };
   
   // OCEAN
   /*

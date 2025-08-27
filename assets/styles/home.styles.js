@@ -122,6 +122,43 @@ const styles = StyleSheet.create({
   footerLoader: {
     marginVertical: 20,
   },
+  // Additional styles for calculator section
+  gridContainer: {
+    marginTop: 24,
+    paddingHorizontal: 16,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#121212",
+    marginBottom: 16,
+  },
+  grid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  iconWrapper: {
+    width: "30%",
+    aspectRatio: 1,
+    borderRadius: 999,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+    alignSelf: "center",
+  },
+  icon: {
+    width: 32,
+    height: 32,
+    marginBottom: 8,
+    tintColor: "#fff",
+    resizeMode: "contain",
+  },
+  iconLabel: {
+    color: "#fff",
+    fontSize: 12,
+    textAlign: "center",
+  },
 });
 
 export default styles;

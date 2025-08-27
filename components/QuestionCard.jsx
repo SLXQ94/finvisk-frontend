@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import {
-    ActivityIndicator,
-    Alert,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Alert,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { API_URL } from "../constants/api";
 import { useAuthStore } from "../store/authStore";
@@ -32,7 +32,7 @@ const QuestionCard = () => {
         return;
       }
 
-      setQuestion(data.question);
+      setQuestion(data?.question);
     } catch (err) {
       Alert.alert("Error", "Something went wrong.");
     } finally {
@@ -127,7 +127,8 @@ const styles = StyleSheet.create({
     color: "#1f2937",
   },
   option: {
-    backgroundColor: "#6366f1",
+    // backgroundColor: "#6366f1",
+    backgroundColor: "#000",
     padding: 12,
     borderRadius: 8,
     marginBottom: 12,

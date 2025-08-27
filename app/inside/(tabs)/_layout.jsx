@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import COLORS from "../../constants/colors";
+import COLORS from "../../../constants/colors";
 
 export default function TabLayout() {
     const insets = useSafeAreaInsets();
@@ -35,6 +35,26 @@ export default function TabLayout() {
                 ),
             }}
         />
+
+        <Tabs.Screen
+            name="chat"
+            options={{
+                title: "Chat",
+                tabBarIcon: ({ color, size }) => (
+                <Ionicons name="chatbubbles-outline" size={size} color={color} />
+                ),
+            }}
+        />
+
+        {/* <Tabs.Screen 
+            name="video" 
+            options={{
+                title: "Video",
+                tabBarIcon: ({ color, size }) => (
+                <Ionicons name="videocam-outline" size={size} color={color} />
+                ),
+            }}
+        /> */}
 
         <Tabs.Screen
             name="profile"

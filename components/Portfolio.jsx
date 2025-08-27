@@ -1,11 +1,21 @@
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Image, Text, TouchableOpacity, View } from "react-native";
 
+import { Link, useRouter } from "expo-router";
 import { API_URL } from "../constants/api";
 import { useAuthStore } from "../store/authStore";
+import { useProfileStore } from "../store/profileStore";
+
 
 const Section = ({ title, items }) => {
   if (!items || items.length === 0) return null;
+  const {CKYC,
+    BasicDetails,
+    Address,
+    AccountDetails,
+    NomineeDetails, NomineeAuthenticated} = useProfileStore();
+  const router = useRouter();
+    
 
   return (
     <View style={{ marginBottom: 24 }}>
@@ -13,17 +23,56 @@ const Section = ({ title, items }) => {
         {title}
       </Text>
       {items.map((item, index) => (
+        
         <View key={index}>
-          <View style={{ backgroundColor: "#fff", padding: 16, borderRadius: 16, marginBottom: 8, flexDirection: "row", alignItems: "center", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 4 }}>
-            <Image
-              source={{ uri: item.imageLink }}
-              style={{ width: 48, height: 48, borderRadius: 12, marginRight: 12, resizeMode: "cover" }}
-            />
-            <View style={{ flex: 1 }}>
-              <Text style={{ fontSize: 16, fontWeight: "500" }}>{item.fundName}</Text>
-              <Text style={{ color: "#6b7280" }}>{item.allocation} %</Text>
-            </View>
-          </View>
+
+        {NomineeAuthenticated ? (<Link
+          href={{
+            pathname: '/inside/modals',
+            query: {
+              bseCode: '02-DP-L1',
+              schemePlanId: '687dd290c7bfcb9c1d6bd5ee',
+            },
+          }}
+          asChild
+        >
+          <TouchableOpacity activeOpacity={0.8}>
+                  <View style={{ backgroundColor: "#fff", padding: 16, borderRadius: 16, marginBottom: 8, flexDirection: "row", alignItems: "center", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 4 }}>
+                    <Image
+                      source={{ uri: item.imageLink }}
+                      style={{ width: 48, height: 48, borderRadius: 12, marginRight: 12, resizeMode: "cover" }}
+                    />
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ fontSize: 16, fontWeight: "500" }}>{item.fundName}</Text>
+                      <Text style={{ color: "#6b7280" }}>{item.allocation} %</Text>
+                    </View>
+                  </View>
+                  </TouchableOpacity>
+          </Link>) : (
+            <TouchableOpacity 
+              activeOpacity={0.8}
+              onPress={() => {
+                if (!CKYC) return router.push("/inside/CKYCForm");
+                if (!BasicDetails) return router.push("/inside/BasicDetailsForm");
+                if (!Address) return router.push("/inside/AddressDetailsForm");
+                if (!AccountDetails) return router.push("/inside/AccountDetailsForm");
+                if (!NomineeDetails) return router.push("/inside/NomineeDetailsForm");
+                if (!NomineeAuthenticated) return router.push("/inside");
+              }}
+            >
+                  <View style={{ backgroundColor: "#fff", padding: 16, borderRadius: 16, marginBottom: 8, flexDirection: "row", alignItems: "center", shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 4 }}>
+                    <Image
+                      source={{ uri: item.imageLink }}
+                      style={{ width: 48, height: 48, borderRadius: 12, marginRight: 12, resizeMode: "cover" }}
+                    />
+                    <View style={{ flex: 1 }}>
+                      <Text style={{ fontSize: 16, fontWeight: "500" }}>{item.fundName}</Text>
+                      <Text style={{ color: "#6b7280" }}>{item.allocation} %</Text>
+                    </View>
+                  </View>
+                  </TouchableOpacity>
+          )}
+
           {index < items.length - 1 && (
             <Text style={{ textAlign: "center", color: "#6b7280", fontWeight: "500" }}>
               {item.allocation === items[index + 1].allocation ? "or" : "and"}
@@ -81,17 +130,6 @@ const ImprovedDivision = () => {
     );
   }
 
-//   const filteredOptions = showBonus
-//     ? Object.fromEntries(
-//         Array.from(portfolio.options).map(([key, values]) => [
-//           key,
-//           values.filter((item) => item.taxSaver),
-//         ])
-//       )
-//     : portfolio.options;
-
-//     console.log({filteredOptions});
-
     const taxSaverFunds = [];
     Object.values(portfolio.options).forEach(category => {
         category.filter(item => item.taxSaver).forEach(bonusItem => {
@@ -103,11 +141,6 @@ const ImprovedDivision = () => {
     
       
     <View style={{ padding: 16 }}>
-      {/* {Object.entries(filteredOptions).map(([key, value]) => (
-        <Section key={key} title={key} items={value} />
-      ))}
-
-      {showBonus && <Section title="Tax Saver" items={portfolio.taxSaverOption} />} */}
 
       {/* Show regular sections */}
       {!showBonus && Object.entries(portfolio.options).map(([key, value]) => (
@@ -137,7 +170,7 @@ const ImprovedDivision = () => {
 
       <TouchableOpacity
         style={{
-          backgroundColor: "#6366f1",
+          backgroundColor: "#121212",
           padding: 12,
           borderRadius: 999,
           marginTop: 16
@@ -148,6 +181,7 @@ const ImprovedDivision = () => {
           {showBonus ? "Show All" : "Make it tax efficient"}
         </Text>
       </TouchableOpacity>
+
     </View>
   );
 };
